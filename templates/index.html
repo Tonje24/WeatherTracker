@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Tracker</title>
+</head>
+<body>
+    <h2>All Observations</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>City</th><th>Country</th><th>Latitude</th>
+            <th>Longitude</th><th>Temperature</th><th>Wind</th>
+            <th>Time</th><th>Notes</th>
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}°C</td>
+            <td>{{ row[6] }}km/h</td>
+            <td>{{ row[7] }}</td>
+            <td>{{ row[8] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
