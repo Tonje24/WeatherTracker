@@ -4,18 +4,14 @@
     <title>Weather Tracker</title>
 </head>
 <body>
-    <h2>All Observations</h2>
+    <h2>Observations</h2>
+    <a href="/">Back to Home</a>
+    <br><br>
     <table border="1">
         <tr>
-            <th>ID</th>
-            <th>City</th>
-            <th>Country</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Temperature</th>
-            <th>Wind</th>
-            <th>Time</th>
-            <th>Notes</th>
+            <th>ID</th><th>City</th><th>Country</th><th>Latitude</th>
+            <th>Longitude</th><th>Temperature</th><th>Wind</th>
+            <th>Time</th><th>Notes</th><th>Delete</th>
         </tr>
         {% for row in rows %}
         <tr>
@@ -27,9 +23,32 @@
             <td>{{ row[5] }}°C</td>
             <td>{{ row[6] }}km/h</td>
             <td>{{ row[7] }}</td>
-            <td>{{ row[8] }}</td>
+            <td>
+                <input type="text" id="notes-{{ row[0] }}" placeholder="Add note">
+                <button onclick="updateNotes({{ row[0] }})">Update</button>
+            </td>
+            <td>
+                <button onclick="deleteRow({{ row[0] }})">Delete</button>
+            </td>
         </tr>
         {% endfor %}
     </table>
+
+    <script>
+        async function updateNotes(id) {
+            const notes = document.getElementById("notes-" + id).value
+            await fetch("/observations/" + id, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({"notes": notes})
+            })
+            location.reload()
+        }
+
+        async function deleteRow(id) {
+            await fetch("/observations/" + id, {method: "DELETE"})
+            location.reload()
+        }
+    </script>
 </body>
 </html>

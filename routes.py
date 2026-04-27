@@ -7,6 +7,17 @@ def init_routes(app):
 
     @app.route("/")
     def home():
+        return render_template("home.html")
+
+    @app.route("/search")
+    def search():
+        city = request.args.get("city")
+        rows = db.get_all()
+        results = [r for r in rows if r[1].lower() == city.lower()]
+        return render_template("index.html", rows=results)
+
+    @app.route("/observations/all")
+    def all_observations():
         rows = db.get_all()
         return render_template("index.html", rows=rows)
 

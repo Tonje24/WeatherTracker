@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Tracker</title>
+</head>
+<body>
+    <h1>Welcome to Weather Tracker</h1>
+    <input type="text" id="searchCity" placeholder="Enter city name">
+    <button onclick="search()">Search</button>
+    <br><br>
+    <a href="/observations/all">View All Observations</a>
+
+    <script>
+        function search() {
+            const city = document.getElementById("searchCity").value
+            window.location.href = "/search?city=" + city
+        }
+    </script>
+</body>
+</html>
